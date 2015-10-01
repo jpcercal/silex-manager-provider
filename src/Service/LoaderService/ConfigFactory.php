@@ -2,46 +2,35 @@
 
 namespace Cekurte\Silex\Manager\Service\LoaderService;
 
+use Cekurte\Silex\Manager\Service\LoaderService\AbstractConfig;
 use Cekurte\Silex\Manager\Service\LoaderService\ConfigInterface;
 
-class ConfigFactory
+class ConfigFactory extends AbstractConfig
 {
     use ConfigTrait;
 
     /**
-     * Disable the constructor
+     * @var ConfigInterface
      */
-    private function __construct()
-    {
-
-    }
+    private $config;
 
     /**
-     * Create a instance of Config using the Static Factory Pattern
-     *
      * @param  string $type
-     *
-     * @return ConfigInterface
      *
      * @throws \InvalidArgumentException
      */
-    public static function create($type)
+    public function __construct($type)
     {
-        $allowedConfigTypes = self::getAllowedConfigTypes();
+        $this->setTypeAsString($type);
+    }
 
-        if (!array_key_exists($type, $allowedConfigTypes)) {
-            throw new \InvalidArgumentException(sprintf(
-                'The type "%s" is invalid, use one of this types %s.',
-                $type,
-                implode(', ', array_keys($allowedConfigTypes))
-            ));
-        }
+    /**
+     * {@inheritdoc}
+     */
+    public function process()
+    {
+        $class = __NAMESPACE__ . '\\' . current($this->getType());
 
-        foreach ($allowedConfigTypes as $configType => $class) {
-            if ($type === $configType) {
-                $class = __NAMESPACE__ . '\\' . $class;
-                return new $class();
-            }
-        }
+        return new $class();
     }
 }
