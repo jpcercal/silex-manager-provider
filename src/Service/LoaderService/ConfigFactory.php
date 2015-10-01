@@ -5,14 +5,9 @@ namespace Cekurte\Silex\Manager\Service\LoaderService;
 use Cekurte\Silex\Manager\Service\LoaderService\AbstractConfig;
 use Cekurte\Silex\Manager\Service\LoaderService\ConfigInterface;
 
-class ConfigFactory extends AbstractConfig
+class ConfigFactory extends AbstractConfig implements ConfigInterface
 {
     use ConfigTrait;
-
-    /**
-     * @var ConfigInterface
-     */
-    private $config;
 
     /**
      * @param  string $type
@@ -21,7 +16,7 @@ class ConfigFactory extends AbstractConfig
      */
     public function __construct($type)
     {
-        $this->setTypeAsString($type);
+        $this->setType($type);
     }
 
     /**
@@ -29,7 +24,7 @@ class ConfigFactory extends AbstractConfig
      */
     public function process()
     {
-        $class = __NAMESPACE__ . '\\' . current($this->getType());
+        $class = __NAMESPACE__ . '\\' . $this->getAllowedConfigTypes()[$this->getType()];
 
         return new $class();
     }

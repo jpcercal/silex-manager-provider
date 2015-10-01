@@ -12,8 +12,8 @@ trait ConfigTrait
     public function getAllowedConfigTypes()
     {
         return [
-            key(ConfigInterface::TYPE_ARRAY)    => current(ConfigInterface::TYPE_ARRAY),
-            key(ConfigInterface::TYPE_FILE_PHP) => current(ConfigInterface::TYPE_FILE_PHP),
+            ConfigInterface::TYPE_ARRAY    => 'ArrayConfig',
+            ConfigInterface::TYPE_FILE_PHP => 'FilePhpConfig',
         ];
     }
 }

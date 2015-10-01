@@ -20,7 +20,7 @@ class FilePhpConfig extends AbstractConfig implements ConfigInterface
      */
     public function process()
     {
-        if ($this->isType(ConfigInterface::TYPE_FILE_PHP) && is_null($this->getResource())) {
+        if ($this->isType(ConfigInterface::TYPE_FILE_PHP) && !is_string($this->getResource())) {
             throw new \InvalidArgumentException('The configuration resource must be a valid value.');
         }
 

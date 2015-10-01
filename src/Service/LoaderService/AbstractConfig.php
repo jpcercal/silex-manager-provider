@@ -7,7 +7,7 @@ abstract class AbstractConfig implements ConfigInterface
     use ConfigTrait;
 
     /**
-     * @var array
+     * @var string
      */
     protected $type;
 
@@ -25,56 +25,35 @@ abstract class AbstractConfig implements ConfigInterface
      */
     protected function isType($type)
     {
-        return key($this->getType()) === $type;
+        return $this->getType() === $type;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setType(array $type)
+    public function setType($type)
     {
+        if (!is_string($type)) {
+            throw new \InvalidArgumentException('The type must be a string');
+        }
+
         if (empty($type)) {
             throw new \InvalidArgumentException('The type can not be empty');
         }
 
-        if (count($type) !== 1) {
-            throw new \InvalidArgumentException('The type must be one element only');
-        }
-
-        if (!is_string(key($type))) {
-            throw new \InvalidArgumentException('The type key must be a string');
-        }
-
-        if (!is_string(current($type))) {
-            throw new \InvalidArgumentException('The type value must be a string');
-        }
-
         $allowedConfigTypes = $this->getAllowedConfigTypes();
 
-        if (!array_key_exists(key($type), $allowedConfigTypes)) {
+        if (!array_key_exists($type = strtolower($type), $allowedConfigTypes)) {
             throw new \InvalidArgumentException(sprintf(
                 'The type "%s" is invalid, use one of this types %s.',
-                key($type),
-                implode(', ', array_keys($allowedConfigTypes))
+                $type,
+                implode(', ', $allowedConfigTypes)
             ));
         }
 
         $this->type = $type;
 
         return $this;
-    }
-
-    public function setTypeAsString($type)
-    {
-        $allowedConfigTypes = $this->getAllowedConfigTypes();
-
-        foreach ($allowedConfigTypes as $key => $value) {
-            if (strtolower($type) === strtolower($key)) {
-                return $this->setType([$key => $value]);
-            }
-        }
-
-        throw new \InvalidArgumentException(sprintf('The type with key "%s" was not found', $type));
     }
 
     /**
