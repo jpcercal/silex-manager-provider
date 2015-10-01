@@ -21,7 +21,7 @@ class ConfigFactory extends AbstractConfig
      */
     public function __construct($type)
     {
-        $this->setTypeAsString($type);
+        $this->setType($type);
     }
 
     /**
@@ -29,7 +29,7 @@ class ConfigFactory extends AbstractConfig
      */
     public function process()
     {
-        $class = __NAMESPACE__ . '\\' . current($this->getType());
+        $class = __NAMESPACE__ . '\\' . $this->getAllowedConfigTypes()[$this->getType()];
 
         return new $class();
     }

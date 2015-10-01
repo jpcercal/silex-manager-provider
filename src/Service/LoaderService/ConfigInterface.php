@@ -4,18 +4,18 @@ namespace Cekurte\Silex\Manager\Service\LoaderService;
 
 interface ConfigInterface
 {
-    const TYPE_ARRAY = ['array' => 'ArrayConfig'];
+    const TYPE_ARRAY = 'array';
 
-    const TYPE_FILE_PHP = ['php' => 'FilePhpConfig'];
+    const TYPE_FILE_PHP = 'php';
 
     /**
      * Set the type of configuration
      *
-     * @param array $type
+     * @param string $type
      *
      * @return ConfigInterface
      */
-    public function setType(array $type);
+    public function setType($type);
 
     /**
      * Set the resource of configuration
@@ -29,7 +29,7 @@ interface ConfigInterface
     /**
      * Get the type of configuration
      *
-     * @return array
+     * @return string
      */
     public function getType();
 
