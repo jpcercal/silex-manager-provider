@@ -14,9 +14,7 @@ class ManagerServiceProvider implements ServiceProviderInterface
      */
     public function boot(Application $app)
     {
-        if (isset($app['cors'])) {
-            $app->after($app["cors"]);
-        }
+
     }
 
     /**
@@ -24,13 +22,13 @@ class ManagerServiceProvider implements ServiceProviderInterface
      */
     public function register(Application $app)
     {
-        if (!empty($app['cekurte.manager.providers'])) {
+        if (isset($app['cekurte.manager.providers']) && !empty($app['cekurte.manager.providers'])) {
             foreach ($app['cekurte.manager.providers'] as $provider => $config) {
                 if (isset($config['register']) && $config['register'] === true) {
                     $loader = new LoaderService($provider);
 
                     if (isset($config['type'])) {
-                        $configuration = ConfigFactory::create($config['type']);
+                        $configuration = (new ConfigFactory($config['type']))->process();
 
                         if (isset($config['src'])) {
                             $configuration->setResource($config['src']);
