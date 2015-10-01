@@ -31,6 +31,6 @@ class FilePhpConfig extends AbstractConfig implements ConfigInterface
             ));
         }
 
-        return require_once $this->getResource();
+        return require $this->getResource();
     }
 }
