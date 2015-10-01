@@ -11,11 +11,11 @@ interface ConfigInterface
     /**
      * Set the type of configuration
      *
-     * @param string $type
+     * @param array $type
      *
      * @return ConfigInterface
      */
-    public function setType($type);
+    public function setType(array $type);
 
     /**
      * Set the resource of configuration

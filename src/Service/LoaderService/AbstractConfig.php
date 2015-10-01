@@ -31,11 +31,50 @@ abstract class AbstractConfig implements ConfigInterface
     /**
      * {@inheritdoc}
      */
-    public function setType($type)
+    public function setType(array $type)
     {
+        if (empty($type)) {
+            throw new \InvalidArgumentException('The type can not be empty');
+        }
+
+        if (count($type) !== 1) {
+            throw new \InvalidArgumentException('The type must be one element only');
+        }
+
+        if (!is_string(key($type))) {
+            throw new \InvalidArgumentException('The type key must be a string');
+        }
+
+        if (!is_string(current($type))) {
+            throw new \InvalidArgumentException('The type value must be a string');
+        }
+
+        $allowedConfigTypes = $this->getAllowedConfigTypes();
+
+        if (!array_key_exists(key($type), $allowedConfigTypes)) {
+            throw new \InvalidArgumentException(sprintf(
+                'The type "%s" is invalid, use one of this types %s.',
+                key($type),
+                implode(', ', array_keys($allowedConfigTypes))
+            ));
+        }
+
         $this->type = $type;
 
         return $this;
+    }
+
+    public function setTypeAsString($type)
+    {
+        $allowedConfigTypes = $this->getAllowedConfigTypes();
+
+        foreach ($allowedConfigTypes as $key => $value) {
+            if (strtolower($type) === strtolower($key)) {
+                return $this->setType([$key => $value]);
+            }
+        }
+
+        throw new \InvalidArgumentException(sprintf('The type with key "%s" was not found', $type));
     }
 
     /**
