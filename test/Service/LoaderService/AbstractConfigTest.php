@@ -38,27 +38,12 @@ class AbstractConfigTest extends ReflectionTestCase
             ->getMockForAbstractClass()
         ;
 
-        $config->setType([]);
+        $config->setType('');
     }
 
     /**
      * @expectedException        \InvalidArgumentException
-     * @expectedExceptionMessage The type must be one element only
-     */
-    public function testSetTypeCountMustBeEqualsOne()
-    {
-        $config = $this
-            ->getMockBuilder('\\Cekurte\\Silex\\Manager\\Service\\LoaderService\\AbstractConfig')
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass()
-        ;
-
-        $config->setType([[], []]);
-    }
-
-    /**
-     * @expectedException        \InvalidArgumentException
-     * @expectedExceptionMessage The type key must be a string
+     * @expectedExceptionMessage The type must be a string
      */
     public function testSetTypeKeyMustBeString()
     {
@@ -69,21 +54,6 @@ class AbstractConfigTest extends ReflectionTestCase
         ;
 
         $config->setType(['fake']);
-    }
-
-    /**
-     * @expectedException        \InvalidArgumentException
-     * @expectedExceptionMessage The type value must be a string
-     */
-    public function testSetTypeValueMustBeString()
-    {
-        $config = $this
-            ->getMockBuilder('\\Cekurte\\Silex\\Manager\\Service\\LoaderService\\AbstractConfig')
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass()
-        ;
-
-        $config->setType(['fake' => 0]);
     }
 
     /**
@@ -98,7 +68,7 @@ class AbstractConfigTest extends ReflectionTestCase
             ->getMockForAbstractClass()
         ;
 
-        $config->setType(['fake' => 'FakeClass']);
+        $config->setType('fake');
     }
 
     public function dataProviderTestSetTypeValid()
@@ -119,7 +89,7 @@ class AbstractConfigTest extends ReflectionTestCase
     /**
      * @dataProvider dataProviderTestSetTypeValid
      */
-    public function testSetTypeAsString($type)
+    public function testSetType($type)
     {
         $config = $this
             ->getMockBuilder('\\Cekurte\\Silex\\Manager\\Service\\LoaderService\\AbstractConfig')
@@ -129,10 +99,10 @@ class AbstractConfigTest extends ReflectionTestCase
 
         $this->assertInstanceOf(
             '\\Cekurte\\Silex\\Manager\\Service\\LoaderService\\ConfigInterface',
-            $config->setTypeAsString($type)
+            $config->setType($type)
         );
 
-        $this->assertEquals($type, key($config->getType()));
+        $this->assertEquals($type, $config->getType());
 
         $this->assertTrue($this->invokeMethod($config, 'isType', [$type]));
     }

@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/packagist/l/cekurte/silex-manager-provider.svg?style=flat-square)](https://packagist.org/packages/cekurte/silex-manager-provider)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/b00b1e95-36e7-4ac7-b576-6617e89e7d9f/mini.png)](https://insight.sensiolabs.com/projects/b00b1e95-36e7-4ac7-b576-6617e89e7d9f)
 
-- A simple silex service provider that adds a Manager to register other Service Providers to increase the power of your application, **contribute with this project**!
+- A simple silex service provider (covered by php unit tests) that adds a Manager to register other Service Providers to increase the power of your application, **contribute with this project**!
 
 ## Installation
 
