@@ -1,9 +1,10 @@
 # SilexManagerProvider
 
-[![Build Status](https://img.shields.io/travis/jpcercal/silex-manager-provider/master.svg?style=flat-square)](http://travis-ci.org/jpcercal/silex-manager-provider)
-[![Coverage Status](https://coveralls.io/repos/jpcercal/silex-manager-provider/badge.svg)](https://coveralls.io/r/jpcercal/silex-manager-provider)
-[![Latest Stable Version](https://img.shields.io/packagist/v/cekurte/silex-manager-provider.svg?style=flat-square)](https://packagist.org/packages/cekurte/silex-manager-provider)
-[![License](https://img.shields.io/packagist/l/cekurte/silex-manager-provider.svg?style=flat-square)](https://packagist.org/packages/cekurte/silex-manager-provider)
+[![Build Status](https://img.shields.io/travis/jpcercal/silex-manager-provider/master.svg?style=square)](http://travis-ci.org/jpcercal/silex-manager-provider)
+[![Code Climate](https://codeclimate.com/github/jpcercal/silex-manager-provider/badges/gpa.svg)](https://codeclimate.com/github/jpcercal/silex-manager-provider)
+[![Coverage Status](https://coveralls.io/repos/github/jpcercal/silex-manager-provider/badge.svg?branch=master)](https://coveralls.io/github/jpcercal/silex-manager-provider?branch=master)
+[![Latest Stable Version](https://img.shields.io/packagist/v/cekurte/silex-manager-provider.svg?style=square)](https://packagist.org/packages/cekurte/silex-manager-provider)
+[![License](https://img.shields.io/packagist/l/cekurte/silex-manager-provider.svg?style=square)](https://packagist.org/packages/cekurte/silex-manager-provider)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/b00b1e95-36e7-4ac7-b576-6617e89e7d9f/mini.png)](https://insight.sensiolabs.com/projects/b00b1e95-36e7-4ac7-b576-6617e89e7d9f)
 
 - A simple silex service provider (covered by php unit tests) that adds a Manager to register other Service Providers to increase the power of your application, **contribute with this project**!
